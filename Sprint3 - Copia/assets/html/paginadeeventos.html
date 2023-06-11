@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Página de Eventos </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/assets/css/paginadeeventos.css">
+</head>
+<body>
+    <header>
+		<div class="logo">
+		  <img src="/assets/img/PUC.png" alt="Logo">
+		  E-Ticket
+		</div>
+		<div class="profile">
+		  <button onclick="acessarPerfil()"><img src="/assets/img/fotodeperfil.png"></button>
+		  <button onclick="sair()">Sair</button>
+		</div>
+	  </header>
+	  
+
+    <div class="navigation">
+      <a href="#" onclick="paginadeeventos()">Página de Eventos</a>
+      <a href="#" onclick="paginadetickets()" >Página de Tickets</a>
+      <a href="#" onclick="qrcode()">Cadastro de Ticket</a>
+      <a href="#" onclick="cadastroEvento()">Cadastro de Evento</a>
+    </div>
+  <main>
+    <h1> Página de Eventos </h1>
+    
+    <div class="search-container">
+  <div class="search-bar">
+    <input type="text" placeholder="Pesquisar eventos">
+    <button>Pesquisar</button>
+  </div>
+</div>
+
+
+    <div id="event-container"></div>
+  </main>
+  
+<footer>
+    <p>&copy; 2023 E-Ingresso. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="/assets/js/paginadeeventos.js"></script>
+  <script src="/assets/js/index.js"></script>
+</body>
+</html>

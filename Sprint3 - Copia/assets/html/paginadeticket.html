@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="/assets/css/qrcode.css">
+  <script src="/assets/js/index.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Tickets</title>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/assets/img/PUC.png" alt="Logo">
+      E-Ticket
+    </div>
+    <div class="profile">
+      <button onclick="acessarPerfil()"><img src="/assets/img/fotodeperfil.png"></button>
+      <button onclick="sair()">Sair</button>
+    </div>
+  </header>
+
+  <div class="navigation">
+    <a href="#" onclick="paginadeeventos()">Página de Eventos</a>
+    <a href="#" onclick="paginadetickets()">Página de Tickets</a>
+    <a href="#" onclick="qrcode()">Cadastro de Ticket</a>
+    <a href="#" onclick="cadastroEvento()">Cadastro de Evento</a>
+  </div>
+
+  <div class="container">
+    <form id="ticketForm">
+      <label for="evento">Evento:</label>
+      <select id="evento">
+      <!-- Opções de eventos -->
+    </select>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" required>
+
+    <label for="sexo">Sexo:</label>
+    <select id="sexo" required>
+      <option value="masculino">Masculino</option>
+      <option value="feminino">Feminino</option>
+    </select>
+
+    <label for="preco">Preço:</label>
+    <input type="number" id="preco" required>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div id="qrCode"></div>
+</div>
+
+<script src="/davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // Carregar opções de eventos no seletor de eventos
+      const eventoSelect = document.getElementById("evento");
+      // ... código para carregar os eventos disponíveis no seletor ...
+
+      // Manipular o envio do formulário
+      const ticketForm = document.getElementById("ticketForm");
+      ticketForm.addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar o envio do formulário por padrão
+
+        // Obter os valores dos campos do formulário
+        const evento = eventoSelect.value;
+        const nome = document.getElementById("nome").value;
+        const sexo = document.getElementById("sexo").value;
+        const preco = document.getElementById("preco").value;
+        
+        removeQRCode(); // Remover o QR code anterior
+
+        const qrCode = generateQRCode(nome, evento, sexo, preco); // Gerar o código QR com base nos dados
+
+        // Criar um objeto com os dados do ticket
+        const ticketData = {
+          evento: evento,
+          nome: nome,
+          sexo: sexo,
+          preco: preco,
+          qrCode: qrCode
+        };
+
+        // Armazenar os dados no Local Storage
+        const tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+        tickets.push(ticketData);
+        localStorage.setItem("tickets", JSON.stringify(tickets));
+
+        // Redirecionar para outra página, exibir uma mensagem de sucesso, etc.
+        window.location.href = "/assets/html/index.html";
+      });
+    });
+
+    // Função para remover o QR code anterior
+    function removeQRCode() {
+      const qrCodeContainer = document.getElementById("qrCode");
+      while (qrCodeContainer.firstChild) {
+        qrCodeContainer.removeChild(qrCodeContainer.firstChild);
+      }
+    }
+
+    // Função para gerar um código QR com base nos dados fornecidos
+    function generateQRCode(nome, evento, sexo, preco) {
+      const qrCodeData = `${nome},${evento},${sexo},${preco}`;
+
+      const qrCode = new QRCode(document.getElementById("qrCode"), {
+        text: qrCodeData,
+        width: 128,
+        height: 128,
+      });
+
+      // Retorne o código QR gerado como uma imagem base64
+      return qrCode.toDataURL();
+    }
+  </script>
+     
+</body>
+</html>

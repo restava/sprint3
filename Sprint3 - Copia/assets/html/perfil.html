@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/perfil.css">
+  <title>Perfil</title>
+</head>
+
+<body>
+  <header>
+		<div class="logo">
+		  <img src="/assets/img/PUC.png" alt="Logo">
+		  E-Ticket
+		</div>
+		<div class="profile">
+		  <button onclick="acessarPerfil()"><img src="/assets/img/fotodeperfil.png"></button>
+		  <button onclick="sair()">Sair</button>
+		</div>
+	  </header>
+	  
+
+    <div class="navigation">
+      <a href="#" onclick="paginadeeventos()">Página de Eventos</a>
+      <a href="#" onclick="paginadetickets()" >Página de Tickets</a>
+      <a href="#" onclick="qrcode()">Cadastro de Ticket</a>
+      <a href="#" onclick="cadastroEvento()">Cadastro de Evento</a>
+    </div>
+
+
+  <div id="userDetails">
+    <h2>Nome de Usuário: <span id="nome-usuario"></span></h2>
+    <h2>Nome do Perfil: <span id="nome-completo"></span></h2>
+    <button onclick="sair()" class="sair">Sair</button>
+  </div>
+  
+
+  <script src="../js/perfil.js"></script>
+  <script src="../js/index.js"></script>
+
+
+  
+</body>
+
+</html>
